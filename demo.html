@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<script src="libs/bwLoader.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="loading" style="position:absolute; top:0; left:0;">0</div>
+<script type="text/javascript">
+
+		var loader = new bwLoader();
+		
+		//添加音乐素材
+		loader.addResources('source/music/music.mp3', 'music');
+		loader.addResources('source/music/welcome.mp3', 'music');
+		
+		//添加图片素材
+		for(var i = 0; i < 8; i++){
+			loader.addResources('source/images/' + (i+1) + '.jpg');
+		}
+				
+		loader.addProgressListener(function (e){
+			var num = Math.floor(e.completedCount / e.totalCount * 100);
+			document.getElementById('loading').innerHTML = num;
+		});
+			
+		loader.addCompletionListener(function (e){
+			document.getElementById('loading').innerHTML = '加载完成：共'+e.completedCount +' | '+ e.totalCount + '文件';
+		});
+			
+		loader.start();
+			
+</script>
+</body>
+</html>
